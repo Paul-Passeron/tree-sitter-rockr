@@ -1,5 +1,62 @@
 [
   {
+    "type": "annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "annotation_item",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_item",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "named_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assign_stmt",
     "named": true,
     "fields": {
@@ -20,7 +77,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -73,6 +138,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -98,7 +167,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -151,6 +228,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -253,7 +334,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -309,6 +398,10 @@
           "named": true
         },
         {
+          "type": "tuple_access_expr",
+          "named": true
+        },
+        {
           "type": "unary_expr",
           "named": true
         }
@@ -332,7 +425,15 @@
           "named": true
         },
         {
+          "type": "break_stmt",
+          "named": true
+        },
+        {
           "type": "compound_assign_stmt",
+          "named": true
+        },
+        {
+          "type": "defer_stmt",
           "named": true
         },
         {
@@ -352,6 +453,10 @@
           "named": true
         },
         {
+          "type": "match_stmt",
+          "named": true
+        },
+        {
           "type": "return_stmt",
           "named": true
         },
@@ -364,6 +469,11 @@
   },
   {
     "type": "bool_lit",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "break_stmt",
     "named": true,
     "fields": {}
   },
@@ -392,7 +502,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -445,6 +563,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -470,7 +592,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -526,7 +656,143 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
+            "named": true
+          }
+        ]
+      },
+      "type_args": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "turbofish",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "cast_expr",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "bool_lit",
+            "named": true
+          },
+          {
+            "type": "call_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
+            "named": true
+          },
+          {
+            "type": "field_access_expr",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "method_call_expr",
+            "named": true
+          },
+          {
+            "type": "name_resolved_expr",
+            "named": true
+          },
+          {
+            "type": "paren_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "sizeof_expr",
+            "named": true
+          },
+          {
+            "type": "static_call_expr",
+            "named": true
+          },
+          {
+            "type": "str_lit",
+            "named": true
+          },
+          {
+            "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          }
+        ]
+      },
+      "ty": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
@@ -574,7 +840,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -627,6 +901,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -662,7 +940,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -718,127 +1004,7 @@
             "named": true
           },
           {
-            "type": "unary_expr",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "const_decl",
-    "named": true,
-    "fields": {
-      "pat": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "constructor_pattern",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "name_resolved_pattern",
-            "named": true
-          },
-          {
-            "type": "tuple_pattern",
-            "named": true
-          },
-          {
-            "type": "wildcard_pattern",
-            "named": true
-          }
-        ]
-      },
-      "ty": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "named_type",
-            "named": true
-          },
-          {
-            "type": "pointer_type",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "binary_expr",
-            "named": true
-          },
-          {
-            "type": "bool_lit",
-            "named": true
-          },
-          {
-            "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_lit",
-            "named": true
-          },
-          {
-            "type": "field_access_expr",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "index_expr",
-            "named": true
-          },
-          {
-            "type": "int_lit",
-            "named": true
-          },
-          {
-            "type": "method_call_expr",
-            "named": true
-          },
-          {
-            "type": "name_resolved_expr",
-            "named": true
-          },
-          {
-            "type": "paren_expr",
-            "named": true
-          },
-          {
-            "type": "postfix_expr",
-            "named": true
-          },
-          {
-            "type": "range_expr",
-            "named": true
-          },
-          {
-            "type": "sizeof_expr",
-            "named": true
-          },
-          {
-            "type": "static_call_expr",
-            "named": true
-          },
-          {
-            "type": "str_lit",
-            "named": true
-          },
-          {
-            "type": "struct_lit",
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -852,10 +1018,21 @@
   {
     "type": "constructor_pattern",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "constructor_pattern",
@@ -866,7 +1043,19 @@
           "named": true
         },
         {
+          "type": "int_lit",
+          "named": true
+        },
+        {
+          "type": "mut_pattern",
+          "named": true
+        },
+        {
           "type": "name_resolved_pattern",
+          "named": true
+        },
+        {
+          "type": "struct_field_pattern",
           "named": true
         },
         {
@@ -875,6 +1064,167 @@
         },
         {
           "type": "wildcard_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cstr_lit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "defer_stmt",
+    "named": true,
+    "fields": {
+      "stmt": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assign_stmt",
+            "named": true
+          },
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "break_stmt",
+            "named": true
+          },
+          {
+            "type": "compound_assign_stmt",
+            "named": true
+          },
+          {
+            "type": "defer_stmt",
+            "named": true
+          },
+          {
+            "type": "expr_stmt",
+            "named": true
+          },
+          {
+            "type": "for_stmt",
+            "named": true
+          },
+          {
+            "type": "if_stmt",
+            "named": true
+          },
+          {
+            "type": "let_decl",
+            "named": true
+          },
+          {
+            "type": "match_stmt",
+            "named": true
+          },
+          {
+            "type": "return_stmt",
+            "named": true
+          },
+          {
+            "type": "while_stmt",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "enum_def",
+    "named": true,
+    "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "enum_variant",
+          "named": true
+        },
+        {
+          "type": "template_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_variant",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "named_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "struct_field",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
           "named": true
         }
       ]
@@ -901,7 +1251,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -957,7 +1315,97 @@
           "named": true
         },
         {
+          "type": "tuple_access_expr",
+          "named": true
+        },
+        {
           "type": "unary_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "extern_block",
+    "named": true,
+    "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "fun_param",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      },
+      "variadic": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "+",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "template_param",
           "named": true
         }
       ]
@@ -994,7 +1442,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1047,6 +1503,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -1084,6 +1544,14 @@
             "named": true
           },
           {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "mut_pattern",
+            "named": true
+          },
+          {
             "type": "name_resolved_pattern",
             "named": true
           },
@@ -1114,7 +1582,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1170,6 +1646,10 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
             "named": true
           }
@@ -1181,6 +1661,16 @@
     "type": "fun_def",
     "named": true,
     "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
       "body": {
         "multiple": false,
         "required": true,
@@ -1226,6 +1716,18 @@
           {
             "type": "pointer_type",
             "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
           }
         ]
       }
@@ -1266,53 +1768,21 @@
           {
             "type": "pointer_type",
             "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "fun_sig",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
+          },
           {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "named_type",
+            "type": "ref_type",
             "named": true
           },
           {
-            "type": "pointer_type",
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "fun_param",
-          "named": true
-        },
-        {
-          "type": "template_param",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1336,7 +1806,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1392,6 +1870,10 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
             "named": true
           }
@@ -1403,10 +1885,6 @@
         "types": [
           {
             "type": "block",
-            "named": true
-          },
-          {
-            "type": "if_stmt",
             "named": true
           }
         ]
@@ -1427,6 +1905,16 @@
     "type": "impl_block",
     "named": true,
     "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
       "implemented": {
         "multiple": false,
         "required": true,
@@ -1437,6 +1925,18 @@
           },
           {
             "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
@@ -1452,29 +1952,17 @@
           {
             "type": "pointer_type",
             "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": false,
-        "types": [
+          },
           {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "ty": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "named_type",
+            "type": "ref_type",
             "named": true
           },
           {
-            "type": "pointer_type",
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
@@ -1485,7 +1973,11 @@
       "required": false,
       "types": [
         {
-          "type": "fun_def",
+          "type": "impl_type_item",
+          "named": true
+        },
+        {
+          "type": "method_def",
           "named": true
         },
         {
@@ -1493,6 +1985,58 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "impl_type_item",
+    "named": true,
+    "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ty": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1536,7 +2080,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1589,6 +2141,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -1614,7 +2170,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1670,6 +2234,10 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
             "named": true
           }
@@ -1686,12 +2254,32 @@
     "type": "interface_decl",
     "named": true,
     "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "supers": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "supertrait_list",
             "named": true
           }
         ]
@@ -1702,11 +2290,11 @@
       "required": false,
       "types": [
         {
-          "type": "fun_sig",
+          "type": "interface_type_item",
           "named": true
         },
         {
-          "type": "interface_type_item",
+          "type": "method_sig",
           "named": true
         },
         {
@@ -1742,6 +2330,18 @@
         {
           "type": "pointer_type",
           "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
         }
       ]
     }
@@ -1760,6 +2360,14 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "mut_pattern",
             "named": true
           },
           {
@@ -1791,6 +2399,18 @@
           {
             "type": "pointer_type",
             "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
           }
         ]
       },
@@ -1811,7 +2431,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1867,11 +2495,261 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "match_branch",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "guard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "bool_lit",
+            "named": true
+          },
+          {
+            "type": "call_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
+            "named": true
+          },
+          {
+            "type": "field_access_expr",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "method_call_expr",
+            "named": true
+          },
+          {
+            "type": "name_resolved_expr",
+            "named": true
+          },
+          {
+            "type": "paren_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "sizeof_expr",
+            "named": true
+          },
+          {
+            "type": "static_call_expr",
+            "named": true
+          },
+          {
+            "type": "str_lit",
+            "named": true
+          },
+          {
+            "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          }
+        ]
+      },
+      "pat": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "constructor_pattern",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "mut_pattern",
+            "named": true
+          },
+          {
+            "type": "name_resolved_pattern",
+            "named": true
+          },
+          {
+            "type": "tuple_pattern",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "match_stmt",
+    "named": true,
+    "fields": {
+      "scrutinee": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "bool_lit",
+            "named": true
+          },
+          {
+            "type": "call_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
+            "named": true
+          },
+          {
+            "type": "field_access_expr",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "method_call_expr",
+            "named": true
+          },
+          {
+            "type": "name_resolved_expr",
+            "named": true
+          },
+          {
+            "type": "paren_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "sizeof_expr",
+            "named": true
+          },
+          {
+            "type": "static_call_expr",
+            "named": true
+          },
+          {
+            "type": "str_lit",
+            "named": true
+          },
+          {
+            "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "match_branch",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1899,7 +2777,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -1952,6 +2838,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -1987,7 +2877,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -2043,7 +2941,21 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
+            "named": true
+          }
+        ]
+      },
+      "type_args": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "turbofish",
             "named": true
           }
         ]
@@ -2051,9 +2963,189 @@
     }
   },
   {
+    "type": "method_def",
+    "named": true,
+    "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "method_params",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "template_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_params",
+    "named": true,
+    "fields": {
+      "receiver": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "receiver",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "fun_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_sig",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "method_params",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "template_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "module_decl",
     "named": true,
     "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -2070,7 +3162,11 @@
       "required": false,
       "types": [
         {
-          "type": "const_decl",
+          "type": "enum_def",
+          "named": true
+        },
+        {
+          "type": "extern_block",
           "named": true
         },
         {
@@ -2097,6 +3193,22 @@
     }
   },
   {
+    "type": "mut_pattern",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "name_resolved_expr",
     "named": true,
     "fields": {},
@@ -2117,7 +3229,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -2173,6 +3293,10 @@
           "named": true
         },
         {
+          "type": "tuple_access_expr",
+          "named": true
+        },
+        {
           "type": "unary_expr",
           "named": true
         }
@@ -2193,6 +3317,14 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int_lit",
+          "named": true
+        },
+        {
+          "type": "mut_pattern",
           "named": true
         },
         {
@@ -2233,6 +3365,18 @@
         {
           "type": "pointer_type",
           "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
         }
       ]
     }
@@ -2258,7 +3402,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -2314,6 +3466,10 @@
           "named": true
         },
         {
+          "type": "tuple_access_expr",
+          "named": true
+        },
+        {
           "type": "unary_expr",
           "named": true
         }
@@ -2323,20 +3479,37 @@
   {
     "type": "pointer_type",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "named_type",
-          "named": true
-        },
-        {
-          "type": "pointer_type",
-          "named": true
-        }
-      ]
+    "fields": {
+      "pointee": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "inferred_type",
+            "named": true
+          },
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2360,7 +3533,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -2413,6 +3594,10 @@
         },
         {
           "type": "struct_lit",
+          "named": true
+        },
+        {
+          "type": "tuple_access_expr",
           "named": true
         },
         {
@@ -2443,7 +3628,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -2496,6 +3689,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -2521,7 +3718,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -2577,7 +3782,52 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "receiver",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ref_type",
+    "named": true,
+    "fields": {
+      "pointee": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "inferred_type",
+            "named": true
+          },
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
@@ -2605,7 +3855,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -2661,6 +3919,10 @@
           "named": true
         },
         {
+          "type": "tuple_access_expr",
+          "named": true
+        },
+        {
           "type": "unary_expr",
           "named": true
         }
@@ -2682,8 +3944,66 @@
         {
           "type": "pointer_type",
           "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "slice_type",
+    "named": true,
+    "fields": {
+      "len": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "int_lit",
+            "named": true
+          }
+        ]
+      },
+      "ty": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "inferred_type",
+            "named": true
+          },
+          {
+            "type": "named_type",
+            "named": true
+          },
+          {
+            "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2696,7 +4016,11 @@
       "required": false,
       "types": [
         {
-          "type": "const_decl",
+          "type": "enum_def",
+          "named": true
+        },
+        {
+          "type": "extern_block",
           "named": true
         },
         {
@@ -2751,7 +4075,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -2807,6 +4139,10 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
             "named": true
           }
@@ -2853,6 +4189,16 @@
     "type": "struct_def",
     "named": true,
     "fields": {
+      "annotations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "annotation",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -2904,6 +4250,68 @@
           {
             "type": "pointer_type",
             "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "struct_field_pattern",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "pattern": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "constructor_pattern",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "mut_pattern",
+            "named": true
+          },
+          {
+            "type": "name_resolved_pattern",
+            "named": true
+          },
+          {
+            "type": "tuple_pattern",
+            "named": true
+          },
+          {
+            "type": "wildcard_pattern",
+            "named": true
           }
         ]
       }
@@ -2923,6 +4331,18 @@
           },
           {
             "type": "pointer_type",
+            "named": true
+          },
+          {
+            "type": "ref_type",
+            "named": true
+          },
+          {
+            "type": "slice_type",
+            "named": true
+          },
+          {
+            "type": "tuple_type",
             "named": true
           }
         ]
@@ -2970,7 +4390,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -3026,11 +4454,46 @@
             "named": true
           },
           {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
             "type": "unary_expr",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "supertrait_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "named_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3059,8 +4522,126 @@
         {
           "type": "pointer_type",
           "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "tuple_access_expr",
+    "named": true,
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "int_lit",
+            "named": true
+          }
+        ]
+      },
+      "object": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "bool_lit",
+            "named": true
+          },
+          {
+            "type": "call_expr",
+            "named": true
+          },
+          {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
+            "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
+            "named": true
+          },
+          {
+            "type": "field_access_expr",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "int_lit",
+            "named": true
+          },
+          {
+            "type": "method_call_expr",
+            "named": true
+          },
+          {
+            "type": "name_resolved_expr",
+            "named": true
+          },
+          {
+            "type": "paren_expr",
+            "named": true
+          },
+          {
+            "type": "postfix_expr",
+            "named": true
+          },
+          {
+            "type": "range_expr",
+            "named": true
+          },
+          {
+            "type": "sizeof_expr",
+            "named": true
+          },
+          {
+            "type": "static_call_expr",
+            "named": true
+          },
+          {
+            "type": "str_lit",
+            "named": true
+          },
+          {
+            "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
+            "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3080,6 +4661,14 @@
           "named": true
         },
         {
+          "type": "int_lit",
+          "named": true
+        },
+        {
+          "type": "mut_pattern",
+          "named": true
+        },
+        {
           "type": "name_resolved_pattern",
           "named": true
         },
@@ -3089,6 +4678,76 @@
         },
         {
           "type": "wildcard_pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "inferred_type",
+          "named": true
+        },
+        {
+          "type": "named_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "turbofish",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "inferred_type",
+          "named": true
+        },
+        {
+          "type": "named_type",
+          "named": true
+        },
+        {
+          "type": "pointer_type",
+          "named": true
+        },
+        {
+          "type": "ref_type",
+          "named": true
+        },
+        {
+          "type": "slice_type",
+          "named": true
+        },
+        {
+          "type": "tuple_type",
           "named": true
         }
       ]
@@ -3115,7 +4774,15 @@
           "named": true
         },
         {
+          "type": "cast_expr",
+          "named": true
+        },
+        {
           "type": "char_lit",
+          "named": true
+        },
+        {
+          "type": "cstr_lit",
           "named": true
         },
         {
@@ -3171,6 +4838,10 @@
           "named": true
         },
         {
+          "type": "tuple_access_expr",
+          "named": true
+        },
+        {
           "type": "unary_expr",
           "named": true
         }
@@ -3208,7 +4879,15 @@
             "named": true
           },
           {
+            "type": "cast_expr",
+            "named": true
+          },
+          {
             "type": "char_lit",
+            "named": true
+          },
+          {
+            "type": "cstr_lit",
             "named": true
           },
           {
@@ -3261,6 +4940,10 @@
           },
           {
             "type": "struct_lit",
+            "named": true
+          },
+          {
+            "type": "tuple_access_expr",
             "named": true
           },
           {
@@ -3409,6 +5092,10 @@
     "named": false
   },
   {
+    "type": "@extern",
+    "named": false
+  },
+  {
     "type": "@include",
     "named": false
   },
@@ -3433,16 +5120,32 @@
     "named": false
   },
   {
+    "type": "as",
+    "named": false
+  },
+  {
     "type": "block_comment",
     "named": true,
     "extra": true
   },
   {
-    "type": "const",
+    "type": "break",
+    "named": false
+  },
+  {
+    "type": "c\"",
+    "named": false
+  },
+  {
+    "type": "defer",
     "named": false
   },
   {
     "type": "else",
+    "named": false
+  },
+  {
+    "type": "enum",
     "named": false
   },
   {
@@ -3495,11 +5198,23 @@
     "extra": true
   },
   {
+    "type": "match",
+    "named": false
+  },
+  {
     "type": "mod",
     "named": false
   },
   {
+    "type": "mut",
+    "named": false
+  },
+  {
     "type": "return",
+    "named": false
+  },
+  {
+    "type": "self",
     "named": false
   },
   {
