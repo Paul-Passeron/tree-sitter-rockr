@@ -6,7 +6,10 @@ module.exports = grammar({
 
   extras: ($) => [/\s/, $.line_comment, $.block_comment],
 
-  conflicts: ($) => [[$.named_type, $.named_type]],
+  conflicts: ($) => [
+    [$.named_type, $.named_type],
+    [$.paren_expr, $.tuple_type],
+  ],
 
   word: ($) => $.identifier,
 
@@ -26,14 +29,26 @@ module.exports = grammar({
         $.module_decl,
         $.fun_def,
         $.interface_decl,
-        $.const_decl,
         $.impl_block,
         $.struct_def,
+        $.enum_def,
+        $.extern_block,
+      ),
+
+    // ─── Annotations ────────────────────────────────────────────────────────
+    // `@[Flag, Call(T, U)]` — prefixes top-level items and impl items.
+    annotation: ($) => seq("@", "[", commaSep($.annotation_item), "]"),
+
+    annotation_item: ($) =>
+      choice(
+        seq(field("name", $.identifier), "(", commaSep($._type_expr), ")"),
+        field("name", $.identifier),
       ),
 
     // ─── Module ─────────────────────────────────────────────────────────────
     module_decl: ($) =>
       seq(
+        field("annotations", repeat($.annotation)),
         "mod",
         field("name", $.identifier),
         "{",
@@ -44,6 +59,7 @@ module.exports = grammar({
     // ─── Struct ─────────────────────────────────────────────────────────────
     struct_def: ($) =>
       seq(
+        field("annotations", repeat($.annotation)),
         "struct",
         field("name", $.identifier),
         optional($._template_params),
@@ -60,9 +76,33 @@ module.exports = grammar({
         ";",
       ),
 
-    // ─── Function ───────────────────────────────────────────────────────────
+    // ─── Enum ───────────────────────────────────────────────────────────────
+    enum_def: ($) =>
+      seq(
+        field("annotations", repeat($.annotation)),
+        "enum",
+        field("name", $.identifier),
+        optional($._template_params),
+        "{",
+        commaSep($.enum_variant),
+        "}",
+      ),
+
+    enum_variant: ($) =>
+      seq(
+        field("name", $.identifier),
+        optional(
+          choice(
+            seq("(", commaSep($._type_expr), ")"),
+            seq("{", repeat($.struct_field), "}"),
+          ),
+        ),
+      ),
+
+    // ─── Function (top level, no receiver) ─────────────────────────────────
     fun_def: ($) =>
       seq(
+        field("annotations", repeat($.annotation)),
         "fun",
         field("name", $.identifier),
         optional($._template_params),
@@ -81,17 +121,53 @@ module.exports = grammar({
         field("ty", $._type_expr),
       ),
 
-    fun_sig: ($) =>
+    // ─── Method receiver (self / &self / &mut self / *self / *mut self) ───
+    receiver: ($) =>
+      choice(
+        "self",
+        seq("mut", "self"),
+        seq("&", "self"),
+        seq("&", "mut", "self"),
+        seq("*", "self"),
+        seq("*", "mut", "self"),
+      ),
+
+    method_params: ($) =>
+      choice(
+        seq(
+          field("receiver", $.receiver),
+          optional(seq(",", commaSep1($.fun_param))),
+        ),
+        commaSep1($.fun_param),
+      ),
+
+    // ─── Method signature (interface items — no body) ──────────────────────
+    method_sig: ($) =>
       seq(
         "fun",
         field("name", $.identifier),
         optional($._template_params),
         "(",
-        commaSep($.fun_param),
+        optional(field("params", $.method_params)),
         ")",
         ":",
         field("return_type", $._type_expr),
         ";",
+      ),
+
+    // ─── Method definition (impl items — has body + receiver) ──────────────
+    method_def: ($) =>
+      seq(
+        field("annotations", repeat($.annotation)),
+        "fun",
+        field("name", $.identifier),
+        optional($._template_params),
+        "(",
+        field("params", $.method_params),
+        ")",
+        ":",
+        field("return_type", $._type_expr),
+        field("body", $.block),
       ),
 
     _template_params: ($) =>
@@ -106,15 +182,19 @@ module.exports = grammar({
     // ─── Interface ──────────────────────────────────────────────────────────
     interface_decl: ($) =>
       seq(
+        field("annotations", repeat($.annotation)),
         "interface",
         field("name", $.identifier),
         optional($._template_params),
+        optional(seq(":", field("supers", $.supertrait_list))),
         "{",
         repeat($._interface_item),
         "}",
       ),
 
-    _interface_item: ($) => choice($.interface_type_item, $.fun_sig),
+    supertrait_list: ($) => seq($._type_expr, repeat(seq("+", $._type_expr))),
+
+    _interface_item: ($) => choice($.interface_type_item, $.method_sig),
 
     interface_type_item: ($) =>
       seq(
@@ -124,21 +204,10 @@ module.exports = grammar({
         ";",
       ),
 
-    // ─── Const ──────────────────────────────────────────────────────────────
-    const_decl: ($) =>
-      seq(
-        "const",
-        field("pat", $._pattern),
-        ":",
-        field("ty", $._type_expr),
-        "=>",
-        field("value", $._expr),
-        ";",
-      ),
-
     // ─── Impl ───────────────────────────────────────────────────────────────
     impl_block: ($) =>
       seq(
+        field("annotations", repeat($.annotation)),
         "impl",
         optional($._template_params),
         optional(seq(field("interface", $._type_expr), "for")),
@@ -148,16 +217,36 @@ module.exports = grammar({
         "}",
       ),
 
-    _impl_item: ($) =>
-      choice(
-        seq(
-          "type",
-          field("name", $.identifier),
-          "=",
-          field("ty", $._type_expr),
-          ";",
-        ),
-        $.fun_def,
+    _impl_item: ($) => choice($.impl_type_item, $.method_def),
+
+    impl_type_item: ($) =>
+      seq(
+        field("annotations", repeat($.annotation)),
+        "type",
+        field("name", $.identifier),
+        "=",
+        field("ty", $._type_expr),
+        ";",
+      ),
+
+    // ─── Extern block ───────────────────────────────────────────────────────
+    // `@extern { fun name(args [+]): ty; }` — no receiver, may be variadic.
+    extern_block: ($) =>
+      seq(
+        "@extern",
+        "{",
+        field("annotations", repeat($.annotation)),
+        "fun",
+        field("name", $.identifier),
+        optional($._template_params),
+        "(",
+        field("params", commaSep($.fun_param)),
+        field("variadic", optional("+")),
+        ")",
+        ":",
+        field("return_type", $._type_expr),
+        ";",
+        "}",
       ),
 
     // ─── Statements ─────────────────────────────────────────────────────────
@@ -169,8 +258,11 @@ module.exports = grammar({
         $.if_stmt,
         $.while_stmt,
         $.for_stmt,
+        $.match_stmt,
         $.let_decl,
         $.block,
+        $.break_stmt,
+        $.defer_stmt,
         $.assign_stmt,
         $.compound_assign_stmt,
         $.expr_stmt,
@@ -183,9 +275,7 @@ module.exports = grammar({
         "if",
         field("cond", $._expr),
         field("then", $.block),
-        optional(
-          seq("else", field("else", choice($.block, $.if_stmt))),
-        ),
+        optional(seq("else", field("else", $.block))),
       ),
 
     while_stmt: ($) =>
@@ -199,6 +289,27 @@ module.exports = grammar({
         field("iterator", $._expr),
         field("body", $.block),
       ),
+
+    match_stmt: ($) =>
+      seq(
+        "match",
+        field("scrutinee", $._expr),
+        "{",
+        repeat($.match_branch),
+        "}",
+      ),
+
+    match_branch: ($) =>
+      seq(
+        field("pat", $._pattern),
+        optional(seq("if", field("guard", $._expr))),
+        "=>",
+        field("body", $.block),
+      ),
+
+    break_stmt: ($) => seq("break", ";"),
+
+    defer_stmt: ($) => seq("defer", field("stmt", $._stmt)),
 
     let_decl: ($) =>
       seq(
@@ -229,6 +340,7 @@ module.exports = grammar({
     _expr: ($) =>
       choice(
         $.binary_expr,
+        $.cast_expr,
         $.unary_expr,
         $.postfix_expr,
         $.call_expr,
@@ -236,6 +348,7 @@ module.exports = grammar({
         $.static_call_expr,
         $.index_expr,
         $.field_access_expr,
+        $.tuple_access_expr,
         $.struct_lit,
         $.range_expr,
         $.name_resolved_expr,
@@ -245,6 +358,7 @@ module.exports = grammar({
         $.int_lit,
         $.char_lit,
         $.str_lit,
+        $.cstr_lit,
         $.bool_lit,
       ),
 
@@ -277,6 +391,12 @@ module.exports = grammar({
         prec.left(6, seq($._expr, field("op", "^"), $._expr)),
       ),
 
+    cast_expr: ($) =>
+      prec.left(
+        12,
+        seq(field("expr", $._expr), "as", field("ty", $._type_expr)),
+      ),
+
     range_expr: ($) =>
       prec.left(
         4,
@@ -287,21 +407,25 @@ module.exports = grammar({
       prec(
         15,
         choice(
-          seq("&", $._expr),
+          seq("&", optional("mut"), $._expr),
           seq("-", $._expr),
           seq("!", $._expr),
-          seq("@", $._expr),
+          seq("*", $._expr),
         ),
       ),
 
+    // Postfix `@` (address-of) and `$` (deref).
     postfix_expr: ($) =>
       prec(20, choice(seq($._expr, "$"), seq($._expr, "@"))),
+
+    turbofish: ($) => seq("::", "<", commaSep1($._any_type_expr), ">"),
 
     call_expr: ($) =>
       prec(
         20,
         seq(
           field("callee", $._expr),
+          optional(field("type_args", $.turbofish)),
           "(",
           field("args", commaSep($._expr)),
           ")",
@@ -316,6 +440,7 @@ module.exports = grammar({
           field("object", $._expr),
           ".",
           field("method", $.identifier),
+          optional(field("type_args", $.turbofish)),
           "(",
           field("args", commaSep($._expr)),
           ")",
@@ -356,6 +481,16 @@ module.exports = grammar({
         ),
       ),
 
+    tuple_access_expr: ($) =>
+      prec(
+        20,
+        seq(
+          field("object", $._expr),
+          ".",
+          field("index", $.int_lit),
+        ),
+      ),
+
     name_resolved_expr: ($) =>
       prec.right(1, seq($.identifier, "::", $._expr)),
 
@@ -383,7 +518,8 @@ module.exports = grammar({
       ),
 
     // ─── Types ──────────────────────────────────────────────────────────────
-    _type_expr: ($) => choice($.named_type, $.pointer_type),
+    _type_expr: ($) =>
+      choice($.named_type, $.ref_type, $.pointer_type, $.tuple_type, $.slice_type),
 
     _any_type_expr: ($) => choice($._type_expr, $.inferred_type),
 
@@ -397,7 +533,25 @@ module.exports = grammar({
         ),
       ),
 
-    pointer_type: ($) => seq("*", $._type_expr),
+    // `&T`, `&mut T`, `&&T` (the lexer emits `&&` as one token, same as `&&`
+    // in expressions — used here for a double reference).
+    ref_type: ($) =>
+      prec.right(
+        seq(choice("&", "&&"), optional("mut"), field("pointee", $._any_type_expr)),
+      ),
+
+    pointer_type: ($) =>
+      prec.right(seq("*", optional("mut"), field("pointee", $._any_type_expr))),
+
+    tuple_type: ($) => seq("(", commaSep($._any_type_expr), ")"),
+
+    slice_type: ($) =>
+      seq(
+        "[",
+        field("ty", $._any_type_expr),
+        optional(seq(";", field("len", $.int_lit))),
+        "]",
+      ),
 
     inferred_type: ($) => token("_"),
 
@@ -405,16 +559,32 @@ module.exports = grammar({
     _pattern: ($) =>
       choice(
         $.wildcard_pattern,
+        $.mut_pattern,
         $.constructor_pattern,
         $.tuple_pattern,
         $.name_resolved_pattern,
         $.identifier,
+        $.int_lit,
       ),
 
     wildcard_pattern: ($) => "_",
 
+    mut_pattern: ($) => seq("mut", field("name", $.identifier)),
+
     constructor_pattern: ($) =>
-      seq($.identifier, "(", commaSep($._pattern), ")"),
+      seq(
+        field("name", $.identifier),
+        choice(
+          seq("(", commaSep($._pattern), ")"),
+          seq("{", commaSep($.struct_field_pattern), "}"),
+        ),
+      ),
+
+    struct_field_pattern: ($) =>
+      choice(
+        seq(field("name", $.identifier), ":", field("pattern", $._pattern)),
+        field("name", $.identifier),
+      ),
 
     tuple_pattern: ($) => seq("(", commaSep($._pattern), ")"),
 
@@ -430,6 +600,9 @@ module.exports = grammar({
 
     str_lit: ($) =>
       seq('"', repeat(choice(/[^"\\]+/, $.escape_sequence)), '"'),
+
+    cstr_lit: ($) =>
+      seq('c"', repeat(choice(/[^"\\]+/, $.escape_sequence)), '"'),
 
     escape_sequence: ($) =>
       token(

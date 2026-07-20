@@ -4,9 +4,9 @@
   "fun"
   "return"
   "let"
-  "const"
   "mod"
   "struct"
+  "enum"
   "impl"
   "interface"
   "for"
@@ -15,11 +15,16 @@
   "else"
   "in"
   "type"
+  "match"
+  "break"
+  "defer"
+  "as"
 ] @keyword
 
 ; ── Include directive ────────────────────────────────────────────────────────
 
 "@include" @keyword.import
+"@extern" @keyword
 
 ; ── Built-in operators / special syntax ─────────────────────────────────────
 
@@ -36,6 +41,7 @@
 ; ── String / char literals ───────────────────────────────────────────────────
 
 (str_lit) @string
+(cstr_lit) @string
 (char_lit) @character
 (escape_sequence) @escape
 
@@ -47,7 +53,8 @@
 ; ── Function definitions ─────────────────────────────────────────────────────
 
 (fun_def name: (identifier) @function)
-(fun_sig name: (identifier) @function)
+(method_sig name: (identifier) @function)
+(method_def name: (identifier) @function.method)
 
 ; ── Function / method calls ──────────────────────────────────────────────────
 
@@ -64,6 +71,8 @@
 
 (struct_def name: (identifier) @type)
 (struct_field name: (identifier) @property)
+(enum_def name: (identifier) @type)
+(enum_variant name: (identifier) @constructor)
 
 ; ── Struct literal ───────────────────────────────────────────────────────────
 
@@ -71,7 +80,7 @@
 
 ; ── Impl blocks ──────────────────────────────────────────────────────────────
 
-"for" @keyword       ; re-capture "for" in impl context (already covered above)
+(impl_block "for" @keyword)
 
 ; ── Interface ────────────────────────────────────────────────────────────────
 
@@ -89,14 +98,17 @@
 
 (fun_param name: (identifier) @variable.parameter)
 
+; ── Method receiver ──────────────────────────────────────────────────────────
+
+(receiver "self" @variable.builtin)
+
 ; ── Field access ─────────────────────────────────────────────────────────────
 
 (field_access_expr field: (identifier) @property)
 
-; ── Let / const patterns ─────────────────────────────────────────────────────
+; ── Let patterns ─────────────────────────────────────────────────────────────
 
 (let_decl pat: (identifier) @variable)
-(const_decl pat: (identifier) @constant)
 
 ; ── Operators ────────────────────────────────────────────────────────────────
 
