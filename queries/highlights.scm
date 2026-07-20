@@ -65,7 +65,6 @@
 ; ── Type names ───────────────────────────────────────────────────────────────
 
 (named_type (identifier) @type)
-(pointer_type "*" @operator (identifier) @type)
 
 ; ── Struct definition ────────────────────────────────────────────────────────
 
